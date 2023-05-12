@@ -36,15 +36,19 @@ BRICK_OFFSET_LEFT = 100
 # Chrome also doesn't implement `addField`, so we can't dynamically
 # make these at runtime; we have to do it now at PDF creation time.
 
-fields = []
-
-# User won't see this default value; it gets set in JS.
-fields.append(make_field(
-    'countdown', x=280, y=650,
-    width=300, height=100,
-    r=1, g=1, b=1,
-    value='Open in Chrome!'
-))
+fields = [
+    make_field(
+        'countdown',
+        x=280,
+        y=650,
+        width=300,
+        height=100,
+        r=1,
+        g=1,
+        b=1,
+        value='Open in Chrome!',
+    )
+]
 
 paddle = make_field(
     'paddle',
@@ -95,10 +99,7 @@ fields.append(lives)
 # mouse-enter events on all the columns.
 for x in range(0, CANVAS_WIDTH):
     band = make_field(
-        'band' + str(x),
-        x=x, y=0,
-        width=1, height=CANVAS_BOTTOM,
-        r=1, g=1, b=1
+        f'band{str(x)}', x=x, y=0, width=1, height=CANVAS_BOTTOM, r=1, g=1, b=1
     )
     band.AA = PdfDict()
     band.AA.E = make_js_action("""
